@@ -1,0 +1,38 @@
+-------------React Native Component snippet------------------
+
+import {View, Text, StyleSheet} from 'react-native'
+import React from 'react'
+
+const id = () => {
+    return(
+        <View>
+            <Text>id</Text>
+        </View>
+    )
+}
+
+export default id
+
+const styles = StyleSheet.create({})
+
+
+--------------------- Dynamic Routing --------------------
+file name of component should be in square brackets like [id].tsx
+
+then you can now use the expo feature
+const { id } = useLocalSearchParams()
+----------------------------------------------------------
+
+------------------- To remove the ugly header at the top -----------------
+return (<Stack>
+        <Stack.Screen
+        name="(tabs)"
+        options={{ headerShown: false }}/>
+
+        <Stack.Screen
+        name="movie/[id]"
+        options={{ headerShown: false }}/>
+    </Stack>;)
+
+ the use of Screen.Screen was used
+ -------------------------------------------------------------------------
