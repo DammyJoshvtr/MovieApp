@@ -27,8 +27,6 @@ export const fetchMovies = async ({ query } : {query: string}) => {
 }
 
 
-
-
 //
 // fetch(url, options)
 //   .then(res => res.json())
