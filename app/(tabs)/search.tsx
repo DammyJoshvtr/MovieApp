@@ -3,6 +3,7 @@ import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native'
 
 import MovieCard from '@/components/MovieCard'
 import SearchBar from '@/components/SearchBar'
+import { updateSearchCount } from '@/services/useMetrics'
 
 import { icons } from '@/constants/icons'
 import { images } from '@/constants/images'
@@ -24,11 +25,18 @@ const search = () => {
     query: searchQuery
   }), false)
 
+  // useEffect(() => {
+  //   updateSearchCount
+  // }, [])
+
   // Debounced search effect
   useEffect(() => {
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
+        if (movies?.length > 0 && movies?.[0]) {
+          await updateSearchCount(searchQuery, movies[0])
+        }
       } else {
         reset()
       }

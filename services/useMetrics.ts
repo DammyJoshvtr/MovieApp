@@ -1,5 +1,11 @@
-import { 
-  collection, query, where, getDocs, addDoc, updateDoc, doc, orderBy, limit 
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
@@ -10,6 +16,9 @@ const movieCollection = collection(db, "metrics");
 // ----------------------------------
 export const updateSearchCount = async (queryText: string, movie: Movie) => {
   try {
+    // seDoc in the database...
+    // Creating a New Document...
+
     // 1. Find movie by searchTerm
     const q = query(
       movieCollection,
@@ -20,6 +29,7 @@ export const updateSearchCount = async (queryText: string, movie: Movie) => {
 
     if (!snapshot.empty) {
       // 2. Exists → update count
+      console.log(snapshot.docs[0])
       const existing = snapshot.docs[0];
       const ref = doc(db, "metrics", existing.id);
 
@@ -43,6 +53,23 @@ export const updateSearchCount = async (queryText: string, movie: Movie) => {
     throw error;
   }
 };
+
+// updateSearchCount("iron man", {
+//   id: 1,
+//   title: "iron man",
+//   adult: true,
+//   backdrop_path: "dsdsdsd",
+//   genre_ids: [1, 2, 3, 4],
+//   original_language: "English",
+//   original_title: "string",
+//   overview: "odinisoos",
+//   popularity: 12,
+//   poster_path: "dsddsddsdsd",
+//   release_date: "12-23-000",
+//   video: true,
+//   vote_average: 13,
+//   vote_count: 122
+// })
 
 // ----------------------------------
 // GET TRENDING MOVIES
