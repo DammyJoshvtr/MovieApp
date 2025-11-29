@@ -5,8 +5,8 @@ import { Image, StyleSheet, TextInput, View } from 'react-native'
 interface Props {
   placeholder: string,
   onPress?: () => void,
-  value?: string,
-  onChangeText: (text: string) => void
+  value?: string, // Telling Typescript that value is optional
+  onChangeText?: (text: string) => void // Telling Typescript that onChangeText is also optional...
 }
 
 const SearchBar = ({placeholder, onPress, value, onChangeText}: Props) => {

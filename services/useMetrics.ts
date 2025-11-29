@@ -5,7 +5,9 @@ import {
   getDocs,
   query,
   updateDoc,
-  where
+  where,
+  orderBy,
+  limit
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
@@ -32,7 +34,6 @@ export const updateSearchCount = async (queryText: string, movie: Movie) => {
       console.log(snapshot.docs[0])
       const existing = snapshot.docs[0];
       const ref = doc(db, "metrics", existing.id);
-
       await updateDoc(ref, {
         count: existing.data().count + 1,
       });
@@ -54,43 +55,26 @@ export const updateSearchCount = async (queryText: string, movie: Movie) => {
   }
 };
 
-// updateSearchCount("iron man", {
-//   id: 1,
-//   title: "iron man",
-//   adult: true,
-//   backdrop_path: "dsdsdsd",
-//   genre_ids: [1, 2, 3, 4],
-//   original_language: "English",
-//   original_title: "string",
-//   overview: "odinisoos",
-//   popularity: 12,
-//   poster_path: "dsddsddsdsd",
-//   release_date: "12-23-000",
-//   video: true,
-//   vote_average: 13,
-//   vote_count: 122
-// })
-
 // ----------------------------------
 // GET TRENDING MOVIES
 // ----------------------------------
-// export const getTrendingMovies = async () => {
-//   try {
-//     const q = query(
-//       movieCollection,
-//       orderBy("count", "desc"),
-//       limit(5)
-//     );
+export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> => {
+  try {
+    const q = query(
+      movieCollection,
+      orderBy("count", "desc"),
+      limit(5)
+    );
 
-//     const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-//     return snapshot.docs.map((d) => ({
-//       id: d.id,
-//       ...d.data(),
-//     })) as TrendingMovie[];
+    return snapshot.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
+    })) as unknown as TrendingMovie[]; //Just to make typescript happy, by knowing what we are returning
 
-//   } catch (error) {
-//     console.error("Error fetching trending movies:", error);
-//     return undefined;
-//   }
-// };
+  } catch (error) {
+    console.error("Error fetching trending movies:", error);
+    return undefined;
+  }
+};
