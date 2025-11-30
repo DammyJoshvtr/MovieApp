@@ -3,6 +3,7 @@ import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native'
 
 import MovieCard from '@/components/MovieCard'
 import SearchBar from '@/components/SearchBar'
+import SearchMovie from '@/components/SearchMovie'
 import { updateSearchCount } from '@/services/useMetrics'
 
 import { icons } from '@/constants/icons'
@@ -104,10 +105,14 @@ const search = () => {
       }
       ListEmptyComponent={
         !loading && !error ? (
-          <View className='mt-10 px-5'>
-            <Text className='text-center text-gray-500'>
-              {searchQuery?.trim() ? 'No movies found' : 'Search for a movie'}
-            </Text>
+          <View className='mt-7'>
+            {searchQuery?.trim() ? (
+              <Text className='text-center text-gray-500'>
+              'No movies found'
+              </Text>
+              ) : (
+                <SearchMovie />
+              )}
           </View>
         ) : null
       }
