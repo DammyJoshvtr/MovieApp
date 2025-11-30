@@ -10,10 +10,10 @@ const SearchMovie = () => {
   );
 
   return (
-    <View className="flex-1 bg-primary pt-6">
+    <View className="flex-1 pt-6">
 
       {/* Header Row */}
-      <View className="flex-row justify-center items-center mb-10">
+      <View className="flex-row justify-center items-center mb-10 ">
         <Search size={20} color="white" />
         <Text className="text-white text-lg ml-2 font-semibold">
           Search for a Movie
