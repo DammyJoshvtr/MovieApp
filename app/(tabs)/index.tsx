@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 
+
 import { fetchMovies } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { getTrendingMovies } from "@/services/useMetrics";
@@ -15,6 +16,7 @@ import { getTrendingMovies } from "@/services/useMetrics";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 
+import InternetError from "@/components/InternetError";
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
 import TrendingCard from "@/components/TrendingCard";
@@ -108,6 +110,21 @@ const Index = () => {
                 scrollEnabled={false}
               />
             </>
+
+            {
+              !trendingMovies && 
+              !movies && 
+              !moviesLoading && 
+              !trendingLoading && 
+              !moviesError && 
+              !trendingError && (
+              <View>
+                <InternetError reconnect={() => {
+                  trendingMovies
+                  movies
+                }}/>
+              </View>
+            )}
           </View>
         )}
       </ScrollView>

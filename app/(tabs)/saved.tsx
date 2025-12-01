@@ -1,48 +1,22 @@
-// import { icons } from "@/constants/icons";
-// import { View, Text, Image } from "react-native";
-// import { SafeAreaView } from "react-native-safe-area-context";
+import { icons } from "@/constants/icons";
+import { View, Text, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-// const Save = () => {
-//   return (
-// 	<SafeAreaView className="bg-primary flex-1 px-10">
-// 		<View className="flex justify-center items-center flex-1 flex-col gap-5">
-// 			<Image source={icons.save} className="size-10" tintColor="#fff" />
-// 			<Text className="text-gray-500 text-base">Save</Text>
-// 		</View>
-// 	</SafeAreaView>
-//   );
-// };
+import { images } from "@/constants/images"
 
-// export default Save;
-
-import { ServerCrash } from 'lucide-react-native';
-import { Text, TouchableOpacity, View } from 'react-native';
-
-const Error = () => {
-	return (
-		<View className="flex-1 justify-center items-center bg-primary px-6">
-			
-			<ServerCrash size={120} color="#fbbf24" /> 
-			{/* yellow-400 */}
-
-			<Text className="text-white text-xl font-semibold mt-4">
-				Oops! Network Error
-			</Text>
-
-			<Text className="text-white text-base opacity-80 mt-1 text-center">
-				Please reconnect to the Internet and try again.
-			</Text>
-
-			<TouchableOpacity
-				className="w-full bg-accent rounded-xl py-3 mt-8 flex flex-row items-center justify-center"
-			>
-				<Text className="text-white text-base font-medium">
-					Go Back
-				</Text>
-			</TouchableOpacity>
+const Save = () => {
+  return (
+	<SafeAreaView className="bg-primary flex-1 px-10">
+		<View className="flex-1 flex-col">
+			<Image
+				source={images.bg}
+				className="absolute w-full z-0"
+				resizeMode="cover"
+			/>
 
 		</View>
-	);
+	</SafeAreaView>
+  );
 };
 
-export default Error;
+export default Save;

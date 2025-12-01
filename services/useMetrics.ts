@@ -78,3 +78,11 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
     return undefined;
   }
 };
+
+// ------------------------------
+// -------STORE SAVED MOVIES -----
+// -------------------------------
+
+const storeSavedMovies = () => {
+  
+}

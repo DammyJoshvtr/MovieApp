@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native'
 
 import MovieCard from '@/components/MovieCard'
+import NoSearchFound from '@/components/NoSearchFound'
 import SearchBar from '@/components/SearchBar'
 import SearchMovie from '@/components/SearchMovie'
-import { updateSearchCount } from '@/services/useMetrics'
 
 import { icons } from '@/constants/icons'
 import { images } from '@/constants/images'
 
 import { fetchMovies } from '@/services/api'
 import useFetch from '@/services/useFetch'
+import { updateSearchCount } from '@/services/useMetrics'
 
 
 const search = () => {
@@ -107,9 +108,7 @@ const search = () => {
         !loading && !error ? (
           <View className='mt-7'>
             {searchQuery?.trim() ? (
-              <Text className='text-center text-gray-500'>
-              'No movies found'
-              </Text>
+              <NoSearchFound />
               ) : (
                 <SearchMovie />
               )}
