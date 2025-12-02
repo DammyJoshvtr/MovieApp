@@ -58,7 +58,10 @@ const Index = () => {
             className="mt-10 self-center"
           />
         ) : moviesError || trendingError ? (
-          <Text>Error: {moviesError?.message || trendingError?.message}</Text>
+          <InternetError reconnect={() => {
+            trendingMovies
+            movies
+          }}/>
         ) : (
           <View className="flex-1 mt-5">
             <SearchBar
@@ -66,7 +69,7 @@ const Index = () => {
                 router.push("/search");
               }}
               placeholder="Search through 300+ movies online"
-            />
+              />
 
             {trendingMovies && (
               <View className="mt-10">
@@ -111,20 +114,6 @@ const Index = () => {
               />
             </>
 
-            {
-              !trendingMovies && 
-              !movies && 
-              !moviesLoading && 
-              !trendingLoading && 
-              !moviesError && 
-              !trendingError && (
-              <View>
-                <InternetError reconnect={() => {
-                  trendingMovies
-                  movies
-                }}/>
-              </View>
-            )}
           </View>
         )}
       </ScrollView>

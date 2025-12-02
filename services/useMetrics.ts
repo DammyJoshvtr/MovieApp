@@ -13,6 +13,8 @@ import { db } from "../firebaseConfig";
 
 const movieCollection = collection(db, "metrics");
 
+const savedCollection = collection(db, "saved movies");
+
 // ----------------------------------
 // UPDATE SEARCH COUNT
 // ----------------------------------
@@ -83,6 +85,6 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
 // -------STORE SAVED MOVIES -----
 // -------------------------------
 
-const storeSavedMovies = () => {
+const storeSavedMovies = async () => {
   
 }
