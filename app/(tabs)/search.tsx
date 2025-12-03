@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native'
 
+import InternetError from '@/components/InternetError'
 import MovieCard from '@/components/MovieCard'
 import NoSearchFound from '@/components/NoSearchFound'
 import SearchBar from '@/components/SearchBar'
@@ -90,9 +91,12 @@ const search = () => {
           )}
 
           {error && (
-            <Text className='text-red-500 rounded-sm px-5 my-3'>
-              Error: {error.message}
-            </Text>
+            // <Text className='text-red-500 rounded-sm px-5 my-3'>
+            //   Error: {error.message}
+            // </Text>
+            <InternetError reconnect={() => {
+              searchQuery
+            }} />
           )}
 
           {!loading && !error && searchQuery.trim() && movies?.length > 0 && (
