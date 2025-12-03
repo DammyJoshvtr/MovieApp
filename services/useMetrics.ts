@@ -113,6 +113,7 @@ export const storeSavedMovies = async (movie: Movie) => {
     });
 
     console.log("Movie saved successfully!");
+    console.log(`LATEST ADDED DOCUMENT: ${ snapshot.docs[0].data() }`)
     
   } catch (error) {
     console.error("Error saving movie:", error);

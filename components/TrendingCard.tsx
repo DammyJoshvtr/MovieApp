@@ -1,13 +1,20 @@
-import { Link } from "expo-router";
 import MaskedView from "@react-native-masked-view/masked-view";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { Link } from "expo-router";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+
+import { CheckCircle } from "lucide-react-native";
 
 import { images } from "@/constants/images";
+
+import { useState } from "react";
 
 const TrendingCard = ({
   movie: { movie_id, title, poster_url },
   index,
 }: TrendingCardProps) => {
+
+  const [active, setActive] = useState(false)
+
   return (
     <Link href={`/movie/${movie_id}`} asChild>
       <TouchableOpacity className="w-32 relative pl-5">
@@ -17,7 +24,7 @@ const TrendingCard = ({
           resizeMode="cover"
         />
 
-        <View className="absolute bottom-9 -left-3.5 px-2 py-1 rounded-full">
+        <View className="absolute bottom-9 -left-[8px] px-2 py-1 rounded-full">
           <MaskedView
             maskElement={
               <Text className="font-bold text-white text-6xl">{index + 1}</Text>
@@ -31,12 +38,20 @@ const TrendingCard = ({
           </MaskedView>
         </View>
 
-        <Text
-          className="text-sm font-bold mt-2 text-light-200"
-          numberOfLines={2}
-        >
-          {title}
-        </Text>
+        <View className="flex-row justify-between items-center mt-1">
+          <Text
+            className="text-sm font-bold mt-2 text-light-200"
+            numberOfLines={2}
+          >
+            {title}
+          </Text>
+          <TouchableOpacity
+            onPress={() => setActive(!active)}
+            className={`${active ? 'bg-green-500' : 'bg-gray-300'} p-1 rounded-full`}
+          >
+            <CheckCircle color={active ? 'white' : 'black'} size={15} strokeWidth={1.3} />
+          </TouchableOpacity>
+        </View>
       </TouchableOpacity>
     </Link>
   );

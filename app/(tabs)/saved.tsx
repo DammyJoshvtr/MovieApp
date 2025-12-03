@@ -4,6 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "@/constants/images"
 
+import { storeSavedMovies } from "@/services/useMetrics"
+
 const Save = () => {
   return (
 	<SafeAreaView className="bg-primary flex-1 px-10">

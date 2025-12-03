@@ -1,7 +1,11 @@
 import { Link } from "expo-router";
-import { Text, Image, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import { icons } from "@/constants/icons";
+
+import { CheckCircle } from "lucide-react-native";
+
+import { useState } from "react";
 
 const MovieCard = ({
   id,
@@ -10,6 +14,12 @@ const MovieCard = ({
   vote_average,
   release_date,
 }: Movie) => {
+
+  const [active, setActive] = useState<boolean>(false)
+
+  // const isActive= active?`bg-green-500` : `bg-white`  
+
+
   return (
     <Link href={`/movie/${id}`} asChild>
       <TouchableOpacity className="w-[30%]">
@@ -34,13 +44,16 @@ const MovieCard = ({
           </Text>
         </View>
 
-        <View className="flex-row items-center justify-between">
-          <Text className="text-xs text-light-300 font-medium mt-1">
+        <View className="flex-row items-center justify-between mt-1">
+          <Text className="text-xs text-light-300 font-medium">
             {release_date?.split("-")[0]}
           </Text>
-          <Text className="text-xs font-medium text-light-300 uppercase">
-            Movie
-          </Text>
+          <TouchableOpacity
+            onPress={() => setActive(!active)}
+            className={`${active ? 'bg-green-500' : 'bg-gray-300'} p-1 rounded-full`}
+          >
+            <CheckCircle color={active ? 'white' : 'black'} size={15} strokeWidth={1.3} />
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     </Link>
