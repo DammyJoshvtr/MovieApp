@@ -85,6 +85,38 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
 // -------STORE SAVED MOVIES -----
 // -------------------------------
 
-const storeSavedMovies = async () => {
-  
-}
+export const storeSavedMovies = async (movie: Movie) => {
+  try {
+    // 1. Check if the movie already exists in saved movies
+    const q = query(
+      savedCollection,
+      where("movie_id", "==", movie.id)
+    );
+
+    const snapshot = await getDocs(q);
+
+    // 2. If movie already exists → do nothing
+    if (!snapshot.empty) {
+      console.log("Movie already saved:", snapshot.docs[0].data());
+      return; // stop here
+    }
+
+    // 3. If not saved → add new document
+    await addDoc(savedCollection, {
+      title: movie.title,
+      movie_id: movie.id,
+      poster: movie.poster_path,
+      popularity: movie.popularity,
+      release_date: movie.release_date,
+      vote_count: movie.vote_count,
+      timestamp: Date.now(), // optional but useful
+    });
+
+    console.log("Movie saved successfully!");
+    
+  } catch (error) {
+    console.error("Error saving movie:", error);
+    throw error;
+  }
+};
+
