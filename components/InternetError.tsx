@@ -7,7 +7,7 @@ interface Reload {
 
 const internetError = ({reconnect}: Reload) => {
 	return (
-		<View className="flex-1 justify-center items-center bg-primary px-6">
+		<View className="flex-1 justify-center items-center px-6">
 			
 			<ServerCrash size={120} color="#fbbf24" /> 
 			{/* yellow-400 */}

@@ -122,3 +122,30 @@ export const storeSavedMovies = async (movie: Movie) => {
   }
 };
 
+export const getStoredMovies = async (movieId: number) => {
+  try {
+    const q = query(
+      savedCollection,
+      where("movie_id", "==", movieId)
+    );
+
+    const snapshot = await getDocs(q);
+
+    // No movie stored
+    if (snapshot.empty) {
+      console.log("DOCUMENT DOES NOT EXIST");
+      return null;
+    }
+
+    // Return stored movie(s)
+    return snapshot.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
+    }));
+    
+  } catch (err) {
+    console.error(`Error fetching stored movie:`, err);
+    return null;
+  }
+};
+
