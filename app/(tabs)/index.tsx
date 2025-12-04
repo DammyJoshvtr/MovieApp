@@ -104,7 +104,13 @@ const Index = () => {
                 data={movies}
                 renderItem={({ item }) => <MovieCard 
                 {...item}
-                addMovie={() => storeSavedMovies(item)}
+                addMovie={() =>
+                  storeSavedMovies({
+                    movie_id: item.id,
+                    title: item.title,
+                    poster_url: item.poster_path, // or full URL if needed
+                  })
+                }
                 />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}

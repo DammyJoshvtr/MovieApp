@@ -85,12 +85,12 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
 // -------STORE SAVED MOVIES -----
 // -------------------------------
 
-export const storeSavedMovies = async (movie: Movie) => {
+export const storeSavedMovies = async (movie: SavedMovies) => {
   try {
     // 1. Check if the movie already exists in saved movies
     const q = query(
       savedCollection,
-      where("movie_id", "==", movie.id)
+      where("movie_id", "==", movie.movie_id)
     );
 
     const snapshot = await getDocs(q);
@@ -104,12 +104,8 @@ export const storeSavedMovies = async (movie: Movie) => {
     // 3. If not saved → add new document
     const newDoc = await addDoc(savedCollection, {
       title: movie.title,
-      movie_id: movie.id,
-      poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-      popularity: movie.popularity,
-      release_date: movie.release_date,
-      vote_count: movie.vote_count,
-      timestamp: Date.now(), // optional but useful
+      movie_id: movie.movie_id,
+      poster: `https://image.tmdb.org/t/p/w500${movie.poster_url}`,
     });
 
     console.log("Movie saved successfully!");
@@ -122,11 +118,11 @@ export const storeSavedMovies = async (movie: Movie) => {
   }
 };
 
-export const getStoredMovies = async (movieId: number) => {
+export const getStoredMovies = async (movie: SavedMovies) => {
   try {
     const q = query(
       savedCollection,
-      where("movie_id", "==", movieId)
+      where("movie_id", "==", movie.movie_id)
     );
 
     const snapshot = await getDocs(q);
@@ -148,4 +144,3 @@ export const getStoredMovies = async (movieId: number) => {
     return null;
   }
 };
-
