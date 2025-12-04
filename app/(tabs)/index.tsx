@@ -11,7 +11,7 @@ import {
 
 import { fetchMovies } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import { getTrendingMovies } from "@/services/useMetrics";
+import { getTrendingMovies, storeSavedMovies } from "@/services/useMetrics";
 
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -35,6 +35,8 @@ const Index = () => {
     loading: moviesLoading,
     error: moviesError,
   } = useFetch(() => fetchMovies({ query: "" }));
+
+
 
   return (
     <View className="flex-1 bg-primary">
@@ -100,7 +102,10 @@ const Index = () => {
 
               <FlatList
                 data={movies}
-                renderItem={({ item }) => <MovieCard {...item} />}
+                renderItem={({ item }) => <MovieCard 
+                {...item}
+                addMovie={() => storeSavedMovies(item)}
+                />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
                 columnWrapperStyle={{

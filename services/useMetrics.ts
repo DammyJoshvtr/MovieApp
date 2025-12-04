@@ -3,11 +3,11 @@ import {
   collection,
   doc,
   getDocs,
+  limit,
+  orderBy,
   query,
   updateDoc,
-  where,
-  orderBy,
-  limit
+  where
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
@@ -102,10 +102,10 @@ export const storeSavedMovies = async (movie: Movie) => {
     }
 
     // 3. If not saved → add new document
-    await addDoc(savedCollection, {
+    const newDoc = await addDoc(savedCollection, {
       title: movie.title,
       movie_id: movie.id,
-      poster: movie.poster_path,
+      poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
       popularity: movie.popularity,
       release_date: movie.release_date,
       vote_count: movie.vote_count,
@@ -113,8 +113,9 @@ export const storeSavedMovies = async (movie: Movie) => {
     });
 
     console.log("Movie saved successfully!");
-    console.log(`LATEST ADDED DOCUMENT: ${ snapshot.docs[0].data() }`)
+    console.log(`LATEST ADDED DOCUMENT: ${ newDoc.id }`)
     
+
   } catch (error) {
     console.error("Error saving movie:", error);
     throw error;
