@@ -144,3 +144,23 @@ export const getStoredMovies = async (movie: SavedMovies) => {
     return null;
   }
 };
+
+export const getAllSavedMovies = async () => {
+  try {
+    const snapshot = await getDocs(savedCollection);
+
+    if (snapshot.empty) {
+      console.log("No saved movies");
+      return [];
+    }
+
+    return snapshot.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
+    }));
+
+  } catch (error) {
+    console.error("Error fetching saved movies:", error);
+    return [];
+  }
+};

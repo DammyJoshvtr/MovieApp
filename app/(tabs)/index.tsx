@@ -87,7 +87,15 @@ const Index = () => {
                     gap: 26,
                   }}
                   renderItem={({ item, index }) => (
-                    <TrendingCard movie={item} index={index} />
+                    <TrendingCard movie={item} index={index}
+                    addMovie={() =>
+                      storeSavedMovies({
+                        movie_id: item.movie_id,
+                        title: item.title,
+                        poster_url: item.poster_url, // or full URL if needed
+                      })
+                    }
+                    />
                   )}
                   keyExtractor={(tItem) => tItem.movie_id.toString()}
                   ItemSeparatorComponent={() => <View className="w-4" />}

@@ -1,8 +1,8 @@
-import { Link } from "expo-router";
-import { Image, Text, TouchableOpacity, View } from "react-native";
 import { icons } from "@/constants/icons";
+import { Link } from "expo-router";
 import { CheckCircle } from "lucide-react-native";
 import { useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 interface MovieCardProps extends Movie {
   addMovie?: () => void;
@@ -50,16 +50,18 @@ const MovieCard = ({
           <TouchableOpacity
             onPress={() => {
               setActive(!active);
-              addMovie();
+              addMovie?.(); //same as "addMovie && addMovie()"
+              // if addMovie Exists call it, if not ignore...all these because addMovie is optional in the interface
             }}
-            className={`${active ? "bg-green-500" : "bg-gray-300"} p-1 rounded-full`}
+            className={`${active ? 'bg-green-500' : 'bg-gray-300'} p-1 rounded-full`}
           >
-            <CheckCircle
-              color={active ? "white" : "black"}
-              size={15}
-              strokeWidth={1.3}
+            <CheckCircle 
+              color={active ? 'white' : 'black'} 
+              size={15} 
+              strokeWidth={1.3} 
             />
           </TouchableOpacity>
+
         </View>
       </TouchableOpacity>
     </Link>

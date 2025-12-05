@@ -8,12 +8,16 @@ import { images } from "@/constants/images";
 
 import { useState } from "react";
 
+interface Addprop extends TrendingCardProps {
+  addMovie?: () => void;
+}
 const TrendingCard = ({
   movie: { movie_id, title, poster_url },
   index,
-}: TrendingCardProps) => {
+  addMovie,
+}: Addprop) => {
 
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   return (
     <Link href={`/movie/${movie_id}`} asChild>
@@ -45,11 +49,19 @@ const TrendingCard = ({
           >
             {title}
           </Text>
+
           <TouchableOpacity
-            onPress={() => setActive(!active)}
-            className={`${active ? 'bg-green-500' : 'bg-gray-300'} p-1 rounded-full`}
+            onPress={() => {
+              setActive(!active);
+              addMovie?.();
+            }}
+            className={`${active ? "bg-green-500" : "bg-gray-300"} p-1 rounded-full`}
           >
-            <CheckCircle color={active ? 'white' : 'black'} size={15} strokeWidth={1.3} />
+            <CheckCircle
+              color={active ? "white" : "black"}
+              size={15}
+              strokeWidth={1.3}
+            />
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -57,4 +69,4 @@ const TrendingCard = ({
   );
 };
 
-export default TrendingCard;
+export default TrendingCard
