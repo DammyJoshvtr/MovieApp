@@ -27,6 +27,7 @@ interface SavedMovies {
   movie_id?: number,
   title: string
   poster_url: string
+  vote_average: number
 }
 
 interface MovieDetails {

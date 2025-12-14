@@ -106,6 +106,7 @@ export const storeSavedMovies = async (movie: SavedMovies) => {
       title: movie.title,
       movie_id: movie.movie_id,
       poster: `https://image.tmdb.org/t/p/w500${movie.poster_url}`,
+      vote_average: movie.vote_average
     });
 
     console.log("Movie saved successfully!");

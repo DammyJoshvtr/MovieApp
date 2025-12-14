@@ -35,7 +35,7 @@ const Save = () => {
         data={movies}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <SavedItems title={item.title} poster_url={item.poster} />
+          <SavedItems title={item.title} poster_url={item.poster} vote_average={item.vote_average} />
         )}
         className="mt-2 pb-32"
       />
