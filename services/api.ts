@@ -27,7 +27,7 @@ export const fetchMovies = async ({query}: { query: string}): Promise<Movie[]> =
 
 export const fetchMovieDetails = async (
   movieId: string
-): Promise<MovieDetails> => {
+): Promise<MovieDetails | SavedMovies> => {
   try {
     const response = await fetch(
       `${TMDB_CONFIG.BASE_URL}/movie/${movieId}?api_key=${TMDB_CONFIG.API_KEY}`,

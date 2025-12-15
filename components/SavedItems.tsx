@@ -4,7 +4,7 @@ import { Image, Text, View } from "react-native";
 
 const SavedItems = ({ title, poster_url, vote_average }: SavedMovies) => {
   return (
-    <View className="w-full flex flex-row mb-5 p-3 gap-3 bg-red-500">
+    <View className="w-full flex flex-row mb-5 p-3 gap-3">
       <Image
         source={{uri: poster_url}}
         className="w-32 h-52 rounded-lg"
@@ -18,7 +18,7 @@ const SavedItems = ({ title, poster_url, vote_average }: SavedMovies) => {
         {title}
       </Text>
 
-      <View className="flex-row items-center justify-start gap-x-1">
+      <View className="flex-row ">
         <Image source={icons.star} className="size-4" />
         <Text className="text-xs text-white font-bold uppercase">
           {Math.round(vote_average / 2)}

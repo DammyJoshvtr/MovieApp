@@ -105,8 +105,8 @@ export const storeSavedMovies = async (movie: SavedMovies) => {
     const newDoc = await addDoc(savedCollection, {
       title: movie.title,
       movie_id: movie.movie_id,
-      poster: `https://image.tmdb.org/t/p/w500${movie.poster_url}`,
-      vote_average: movie.vote_average
+      // poster: `https://image.tmdb.org/t/p/w500${movie.poster_url}`,
+      // vote_average: movie.vote_average ?? 0
     });
 
     console.log("Movie saved successfully!");
@@ -119,7 +119,7 @@ export const storeSavedMovies = async (movie: SavedMovies) => {
   }
 };
 
-export const getStoredMovies = async (movie: SavedMovies) => {
+export const getStoredMovies = async (movie: SavedMovies): Promise<SavedMovies[] | null> => {
   try {
     const q = query(
       savedCollection,
@@ -128,23 +128,20 @@ export const getStoredMovies = async (movie: SavedMovies) => {
 
     const snapshot = await getDocs(q);
 
-    // No movie stored
     if (snapshot.empty) {
-      console.log("DOCUMENT DOES NOT EXIST");
       return null;
     }
 
-    // Return stored movie(s)
     return snapshot.docs.map((d) => ({
       id: d.id,
-      ...d.data(),
+      ...(d.data() as Omit<SavedMovies, "id">),
     }));
-    
   } catch (err) {
-    console.error(`Error fetching stored movie:`, err);
+    console.error("Error fetching stored movie:", err);
     return null;
   }
 };
+
 
 export const getAllSavedMovies = async () => {
   try {
