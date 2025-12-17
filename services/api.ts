@@ -47,4 +47,6 @@ export const fetchMovieDetails = async (
     console.error("Error fetching movie details:", error);
     throw error;
   }
-};
+  };
+
+const fetchDetails = ""

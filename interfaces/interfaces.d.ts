@@ -25,9 +25,10 @@ interface TrendingMovie {
 
 interface SavedMovies {
   movie_id?: number,
-  title: string
-  poster_url: string
-  vote_average: number
+  title: string,
+  poster_url: string,
+  vote_average: number,
+  release_date: string
 }
 
 interface MovieDetails {
