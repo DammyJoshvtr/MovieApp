@@ -89,14 +89,16 @@ const search = () => {
           {loading && (
             <ActivityIndicator size='large' color="#0000ff" />
           )}
-
-          {error && (
+            {error && (
             // <Text className='text-red-500 rounded-sm px-5 my-3'>
             //   Error: {error.message}
             // </Text>
-            <InternetError reconnect={() => {
-              searchQuery
-            }} />
+            <View className='h-full'>
+
+              <InternetError reconnect={() => {
+                searchQuery
+              }} />
+            </View>
           )}
 
           {!loading && !error && searchQuery.trim() && movies?.length > 0 && (

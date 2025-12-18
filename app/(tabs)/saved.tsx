@@ -31,14 +31,14 @@ const Save = () => {
       
       <Text className="text-white text-2xl ml-4">Saved Movies</Text>
 
-      <FlatList
+      {/* <FlatList
         data={movies}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <SavedItems title={item.title} poster_url={item.poster}} />
+          <SavedItems title={item.title} poster_url={item.poster_url}} />
         )}
         className="mt-2 pb-32"
-      />
+      /> */}
 
     </View>
   );
