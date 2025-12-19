@@ -1,3 +1,5 @@
+import { getAllSavedMovies } from "./useMetrics";
+
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
   API_KEY: process.env.EXPO_PUBLIC_MOVIE_API_KEY,
@@ -27,7 +29,7 @@ export const fetchMovies = async ({query}: { query: string}): Promise<Movie[]> =
 
 export const fetchMovieDetails = async (
   movieId: string
-): Promise<MovieDetails | SavedMovies> => {
+): Promise<MovieDetails> => {
   try {
     const response = await fetch(
       `${TMDB_CONFIG.BASE_URL}/movie/${movieId}?api_key=${TMDB_CONFIG.API_KEY}`,
@@ -49,4 +51,25 @@ export const fetchMovieDetails = async (
   }
   };
 
-const fetchDetails = ""
+export const getSavedMovieDetails = async (): Promise<SavedMovieUI[]> => {
+  const savedMovies = await getAllSavedMovies();
+  if (savedMovies.length === 0) return [];
+
+  const details = await Promise.all(
+    savedMovies.map((movie) =>
+      fetchMovieDetails(movie.movie_id.toString())
+    )
+  );
+
+  return details.map((movie) => ({
+    id: movie.id,
+    title: movie.title,
+    poster_url: movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : "",
+    vote_average: movie.vote_average ?? 0,
+    release_date: movie.release_date ?? "Unknown",
+  }));
+};
+
+

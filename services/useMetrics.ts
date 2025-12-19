@@ -10,6 +10,7 @@ import {
   where
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { fetchMovieDetails } from "./api";
 
 const movieCollection = collection(db, "metrics");
 
@@ -143,22 +144,16 @@ export const getStoredMovies = async (movie: SavedMovies): Promise<SavedMovies[]
 };
 
 
-export const getAllSavedMovies = async () => {
-  try {
-    const snapshot = await getDocs(savedCollection);
+export const getAllSavedMovies = async (): Promise<SavedMovieWithId[]> => {
+  const snapshot = await getDocs(savedCollection);
 
-    if (snapshot.empty) {
-      console.log("No saved movies");
-      return [];
-    }
+  if (snapshot.empty) return [];
 
-    return snapshot.docs.map((d) => ({
-      id: d.id,
-      ...d.data(),
-    }));
-
-  } catch (error) {
-    console.error("Error fetching saved movies:", error);
-    return [];
-  }
+  return snapshot.docs.map((d) => ({
+    id: d.id,
+    ...(d.data() as SavedMovies),
+  }));
 };
+
+
+

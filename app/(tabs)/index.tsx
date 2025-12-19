@@ -20,6 +20,7 @@ import InternetError from "@/components/InternetError";
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
 import TrendingCard from "@/components/TrendingCard";
+import { useEffect } from "react";
 
 const Index = () => {
   const router = useRouter();
@@ -35,6 +36,10 @@ const Index = () => {
     loading: moviesLoading,
     error: moviesError,
   } = useFetch(() => fetchMovies({ query: "" }));
+
+  useEffect(() => {
+    console.log('Movies Stored',storeSavedMovies)
+  }, [])
 
 
 
@@ -92,7 +97,6 @@ const Index = () => {
                       storeSavedMovies({
                         movie_id: item.movie_id,
                         title: item.title,
-                        poster_url: item.poster_url, // or full URL if needed
                       })
                     }
                     />
@@ -115,8 +119,7 @@ const Index = () => {
                 addMovie={() =>
                   storeSavedMovies({
                     movie_id: item.id,
-                    title: item.title,
-                    poster_url: item.poster_path, // or full URL if needed
+                    title: item.title
                   })
                 }
                 />}

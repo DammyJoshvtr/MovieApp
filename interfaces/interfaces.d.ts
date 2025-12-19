@@ -23,12 +23,23 @@ interface TrendingMovie {
   poster_url: string;
 }
 
+// Firestore Document
 interface SavedMovies {
-  movie_id?: number,
+  movie_id: number,
   title: string,
-  poster_url: string,
-  vote_average: number,
-  release_date: string
+}
+
+type SavedMovieWithId = SavedMovies & {
+  id: string;
+};
+
+// UI Model
+interface SavedMovieUI {
+  id: number;
+  title: string;
+  poster_url: string;
+  vote_average: number;
+  release_date: string;
 }
 
 interface MovieDetails {
