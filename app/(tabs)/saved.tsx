@@ -22,7 +22,9 @@ const Save = () => {
 
   if (loading) {
     return (
-      <ActivityIndicator />
+      <View className="flex-1 bg-primary">
+        <ActivityIndicator />
+      </View>
     )
   }
 
