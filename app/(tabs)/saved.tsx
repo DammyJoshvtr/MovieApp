@@ -4,7 +4,7 @@ import { images } from "@/constants/images";
 import { getSavedMovieDetails } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useEffect } from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 
 const Save = () => {
 
@@ -19,6 +19,12 @@ const Save = () => {
       console.log('Saved Movies:',movie)
     })
   }, [])
+
+  if (loading) {
+    return (
+      <ActivityIndicator />
+    )
+  }
 
   return (
     <View className="flex-1 bg-primary">
