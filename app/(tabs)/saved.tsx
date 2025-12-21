@@ -34,9 +34,9 @@ const Save = () => {
         className="w-12 h-10 mt-20 mb-5 mx-auto"
       />
 
-      <Text className="text-white text-2xl ml-4 mb-3">
+      {/* <Text className="text-white text-2xl ml-4 mb-3">
         Saved Movies
-      </Text>
+      </Text> */}
 
       <FlatList
         data={movies}

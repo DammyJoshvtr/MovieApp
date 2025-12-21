@@ -1,4 +1,5 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -8,15 +9,14 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
 
 import { icons } from "@/constants/icons";
 import { fetchMovieDetails } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import {
-  storeSavedMovies,
-  removeSavedMovie,
   getAllSavedMovies,
+  removeSavedMovie,
+  storeSavedMovies,
 } from "@/services/useMetrics";
 
 interface MovieInfoProps {
@@ -112,8 +112,8 @@ const Details = () => {
         />
 
         <View className="px-5 mt-5">
-          <View className="flex-row justify-between items-center">
-            <Text className="text-white text-xl font-bold">
+          <View className="flex-cols items-start gap-3">
+            <Text className="text-white text-xl font-bold ">
               {movie?.title}
             </Text>
 
