@@ -7,10 +7,15 @@ import {
   orderBy,
   query,
   updateDoc,
-  where
+  where,
+  deleteDoc
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { fetchMovieDetails } from "./api";
+
+interface SavedMovieWithId extends SavedMovies {
+  id: string; // Firestore doc id
+}
 
 const movieCollection = collection(db, "metrics");
 
@@ -153,6 +158,19 @@ export const getAllSavedMovies = async (): Promise<SavedMovieWithId[]> => {
     id: d.id,
     ...(d.data() as SavedMovies),
   }));
+};
+
+export const removeSavedMovie = async (
+  docId: string
+): Promise<void> => {
+  try {
+    const ref = doc(savedCollection, docId);
+    await deleteDoc(ref);
+    console.log("Movie removed successfully");
+  } catch (error) {
+    console.error("Error removing movie:", error);
+    throw error;
+  }
 };
 
 

@@ -36,3 +36,226 @@ return (<Stack>
 
  the use of Screen.Screen was used
  -------------------------------------------------------------------------
+
+
+
+ -------------------------------------------------------
+ ADVISE ON BUILDING LOGIC ON YOUR OWN
+ -------------------------------------------------------
+
+ This is a very good question, and honestly it’s the question that separates tutorial followers from real developers.
+
+I’ll be very direct and practical with you.
+
+🧠 WHY YOU FEEL STUCK WITH LOGIC (this is normal)
+
+Right now, your brain is trained to:
+
+Recognize patterns
+
+Not create solutions from scratch
+
+Tutorials do this:
+
+“Follow → Copy → It works”
+
+But real logic is:
+
+“Problem → Think → Try → Fail → Fix”
+
+That gap is exactly what you’re feeling.
+
+🔑 CORE RULE (memorize this)
+
+Logic is not learned by watching.
+Logic is learned by struggling.
+
+If you don’t struggle, your brain doesn’t grow.
+
+🧩 STEP-BY-STEP SYSTEM TO BUILD LOGIC (this works)
+1️⃣ ALWAYS WRITE THE PROBLEM IN ENGLISH FIRST
+
+Before touching code, ask:
+
+❓ What EXACTLY should happen?
+
+Example (your saved movie issue):
+
+❌ “Unsave is not working”
+✅ “When I click unsave, remove the movie from Firestore AND from the UI immediately.”
+
+Write it down.
+
+2️⃣ BREAK IT INTO SMALL STEPS (VERY SMALL)
+
+Ask yourself:
+
+Where is the data coming from?
+
+Where is it stored?
+
+What changes when I click?
+
+Example:
+
+User clicks Unsave
+
+Firestore deletes the movie
+
+Local list still contains it ❌
+
+UI must remove it ✅
+
+Now the solution becomes obvious:
+👉 Remove it from local state
+
+3️⃣ ASK “WHAT STATE SHOULD CHANGE?”
+
+This is the most important React question.
+
+If the UI doesn’t update, one of these is wrong:
+
+State didn’t change
+
+Component doesn’t know state changed
+
+So you ask:
+
+“Which useState should change?”
+
+If you can answer that, you can solve 70% of bugs.
+
+4️⃣ BUILD WITHOUT GOOGLE (for 20–30 minutes)
+
+This is painful, but necessary.
+
+Rule:
+
+❌ No YouTube
+
+❌ No ChatGPT
+
+❌ No StackOverflow
+
+Just:
+
+console.log
+
+thinking
+
+failing
+
+After 30 minutes, then search.
+
+Your brain grows in the struggle phase, not the solution phase.
+
+5️⃣ REBUILD FEATURES YOU ALREADY KNOW
+
+This is 🔥 powerful.
+
+Rebuild:
+
+Save / Unsave
+
+Todo list
+
+Like button
+
+Cart system
+
+But:
+
+❌ No tutorial
+
+❌ No copying
+
+✅ Just logic
+
+If it takes you 3 days — GOOD.
+
+🛠 PRACTICAL EXERCISES (do these)
+🟢 Exercise 1: Toggle Logic
+// Click button → toggle saved state
+
+
+Ask:
+
+What is the state?
+
+What changes?
+
+🟢 Exercise 2: Filter Logic
+// Remove item from array by id
+
+
+Force yourself to write:
+
+array.filter(...)
+
+
+without help.
+
+🟢 Exercise 3: Sync UI with Backend
+// Delete from DB → update UI
+
+
+Same problem you just solved.
+
+🧠 MENTAL SHIFT YOU NEED
+
+Stop asking:
+
+“What code do I write?”
+
+Start asking:
+
+“What changed?”
+
+UI is just a reflection of state.
+
+🚫 BIGGEST MISTAKES TO AVOID
+
+❌ Watching 5 tutorials in a row
+❌ Copy-pasting without understanding
+❌ Thinking you’re “not smart enough”
+
+You are exactly where you should be.
+
+🧭 SIMPLE DAILY ROUTINE (30–60 mins)
+
+Build one small feature
+
+Break it in English
+
+Fail
+
+Fix
+
+Write what you learned (even 3 lines)
+
+Do this daily → logic improves fast.
+
+💬 REAL TALK (important)
+
+Every good dev you admire:
+
+Was confused
+
+Felt stupid
+
+Broke things constantly
+
+The difference?
+👉 They didn’t quit
+
+You’re already doing the hard part by asking why.
+
+If you want, next I can:
+
+Give you logic-only challenges
+
+Review your thinking, not just code
+
+Teach you how seniors debug mentally
+
+Just tell me 👍
