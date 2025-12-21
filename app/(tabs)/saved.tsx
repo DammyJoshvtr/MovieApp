@@ -5,6 +5,7 @@ import { getSavedMovieDetails } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { useEffect } from "react";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Save = () => {
 
@@ -22,9 +23,9 @@ const Save = () => {
 
   if (loading) {
     return (
-      <View className="flex-1 bg-primary">
+      <SafeAreaView className="flex-1 bg-primary">
         <ActivityIndicator />
-      </View>
+      </SafeAreaView>
     )
   }
 

@@ -11,7 +11,7 @@ import {
 
 import { fetchMovies } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import { getTrendingMovies, storeSavedMovies } from "@/services/useMetrics";
+import { getTrendingMovies } from "@/services/useMetrics";
 
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -20,7 +20,6 @@ import InternetError from "@/components/InternetError";
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
 import TrendingCard from "@/components/TrendingCard";
-import { useEffect } from "react";
 
 const Index = () => {
   const router = useRouter();
@@ -37,9 +36,9 @@ const Index = () => {
     error: moviesError,
   } = useFetch(() => fetchMovies({ query: "" }));
 
-  useEffect(() => {
-    console.log('Movies Stored',storeSavedMovies)
-  }, [])
+  // useEffect(() => {
+  //   console.log('Movies Stored',storeSavedMovies)
+  // }, [])
 
 
 
@@ -92,14 +91,7 @@ const Index = () => {
                     gap: 26,
                   }}
                   renderItem={({ item, index }) => (
-                    <TrendingCard movie={item} index={index}
-                    addMovie={() =>
-                      storeSavedMovies({
-                        movie_id: item.movie_id,
-                        title: item.title,
-                      })
-                    }
-                    />
+                    <TrendingCard movie={item} index={index}/>
                   )}
                   keyExtractor={(tItem) => tItem.movie_id.toString()}
                   ItemSeparatorComponent={() => <View className="w-4" />}
@@ -116,12 +108,6 @@ const Index = () => {
                 data={movies}
                 renderItem={({ item }) => <MovieCard 
                 {...item}
-                addMovie={() =>
-                  storeSavedMovies({
-                    movie_id: item.id,
-                    title: item.title
-                  })
-                }
                 />}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}

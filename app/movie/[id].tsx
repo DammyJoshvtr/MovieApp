@@ -12,6 +12,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { icons } from "@/constants/icons";
 import { fetchMovieDetails } from "@/services/api";
 import useFetch from "@/services/useFetch";
+import { storeSavedMovies } from "@/services/useMetrics";
+import { useState } from "react";
 
 interface MovieInfoProps {
   label: string;
@@ -27,13 +29,31 @@ const MovieInfo = ({ label, value }: MovieInfoProps) => (
   </View>
 );
 
+// const addMovie = () => {
+//   storeSavedMovies()
+// }
+
 const Details = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
+  const [saved, setSaved] = useState<boolean>(false)
 
-  const { data: movie, loading } = useFetch(() =>
+  
+  
+  const { data: movie, loading } = useFetch(() => 
     fetchMovieDetails(id as string)
   );
+
+  const handleSave = async () => {
+    if (!movie) return;
+    await storeSavedMovies({
+      movie_id: movie.id,
+      title: movie.title
+    })
+
+    // setSaved(prev => !prev);
+    setSaved(true)
+  };
 
   if (loading)
     return (
@@ -64,7 +84,35 @@ const Details = () => {
         </View>
 
         <View className="flex-col items-start justify-center mt-5 px-5">
-          <Text className="text-white font-bold text-xl">{movie?.title}</Text>
+          <View className="flex-row items-center justify-between w-full">
+            <Text className="text-white font-bold text-xl">{movie?.title}</Text>
+
+            {/* Save Section */}
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={handleSave}
+              className={`flex-row items-center gap-2 px-4 py-2 rounded-full
+                ${saved
+                  ? "bg-yellow-500"
+                  : "border border-white/30 bg-white/10"
+                }`}
+            >
+              <Image
+                source={icons.save}
+                className="w-4 h-4"
+                tintColor={saved ? "#000" : "#fff"}
+              />
+              <Text
+                className={`text-sm font-semibold ${
+                  saved ? "text-black" : "text-white"
+                }`}
+              >
+                {saved ? "Saved" : "Save"}
+              </Text>
+            </TouchableOpacity>
+
+
+          </View>
           <View className="flex-row items-center gap-x-1 mt-2">
             <Text className="text-light-200 text-sm">
               {movie?.release_date?.split("-")[0]} •
@@ -82,6 +130,7 @@ const Details = () => {
             <Text className="text-light-200 text-sm">
               ({movie?.vote_count} votes)
             </Text>
+
           </View>
 
           <MovieInfo label="Overview" value={movie?.overview} />

@@ -4,19 +4,16 @@ import { CheckCircle } from "lucide-react-native";
 import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-interface MovieCardProps extends Movie {
-  addMovie?: () => void;
-}
+
 
 const MovieCard = ({
   id,
   poster_path,
   title,
   vote_average,
-  release_date,
-  addMovie
-}: MovieCardProps) => {
-  const [active, setActive] = useState<boolean>(false);
+  release_date
+}: Movie) => {
+  // const [active, setActive] = useState<boolean>(false);
 
   return (
     <Link href={`/movie/${id}`} asChild>
@@ -46,21 +43,6 @@ const MovieCard = ({
           <Text className="text-xs text-light-300 font-medium">
             {release_date?.split("-")[0]}
           </Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              setActive(!active);
-              addMovie?.(); //same as "addMovie && addMovie()"
-              // if addMovie Exists call it, if not ignore...all these because addMovie is optional in the interface
-            }}
-            className={`${active ? 'bg-green-500' : 'bg-gray-300'} p-1 rounded-full`}
-          >
-            <CheckCircle 
-              color={active ? 'white' : 'black'} 
-              size={15} 
-              strokeWidth={1.3} 
-            />
-          </TouchableOpacity>
 
         </View>
       </TouchableOpacity>

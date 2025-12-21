@@ -2,7 +2,6 @@ import MaskedView from "@react-native-masked-view/masked-view";
 import { Link } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-import { CheckCircle } from "lucide-react-native";
 
 import { images } from "@/constants/images";
 
@@ -12,10 +11,7 @@ interface Addprop extends TrendingCardProps {
   addMovie?: () => void;
 }
 const TrendingCard = ({
-  movie: { movie_id, title, poster_url },
-  index,
-  addMovie,
-}: Addprop) => {
+  movie: { movie_id, title, poster_url }, index}: TrendingCardProps) => {
 
   const [active, setActive] = useState(false);
 
@@ -50,19 +46,6 @@ const TrendingCard = ({
             {title}
           </Text>
 
-          <TouchableOpacity
-            onPress={() => {
-              setActive(!active);
-              addMovie?.();
-            }}
-            className={`${active ? "bg-green-500" : "bg-gray-300"} p-1 rounded-full`}
-          >
-            <CheckCircle
-              color={active ? "white" : "black"}
-              size={15}
-              strokeWidth={1.3}
-            />
-          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     </Link>
